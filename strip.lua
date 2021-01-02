@@ -22,12 +22,14 @@ local REFUEL_MIN = 1000
 local tileCount = 0
 local tileColCount = 0
 local tilesWalked = 0
+local dir = 0
 
-if #arg == 2 then
+if #arg == 3 then
     length = tonumber(arg[1])
     deep = tonumber(arg[2])
+    dir = tonumber(arg[3])
 else
-    print("Please enter the length")
+    print("Please enter the length SPACE width SPACE direction (1 for left, 2 for right)")
     return
 end
 
@@ -38,8 +40,8 @@ local TORCHES = {
 local ACCEPTED_FUELS = {
     "minecraft:coal_block",
     "minecraft:coal",
-	"minecraft:dried_kelp_block",
-	"minecraft:charcoal"	
+    "minecraft:dried_kelp_block",
+    "minecraft:charcoal"
 }
 
 function getTorchesCount()
@@ -73,11 +75,9 @@ function plantTorches()
         if currentItem ~= nil then
             for x = 1, #TORCHES do
                 if currentItem.name == TORCHES[x] then
-                    turtle.turnLeft()
                     turtle.select(i)
-                    turtle.placeUp()
+                    turtle.placeDown()
                     turtle.select(1)
-                    turtle.turnRight()
                     break
                 end
             end
@@ -86,20 +86,15 @@ function plantTorches()
 end
 
 function goHomeRow()
-
     print("Going home...")
-    turtle.turnLeft()
-    turtle.turnLeft()
+    turnAround()
     for i = 0, tilesWalked - 1 do
         turtle.forward()
     end
-    turtle.turnLeft()
-    turtle.turnLeft()
+    turnAround()
     print("I am home...")
     tilesWalked = 0
 end
-
-
 
 function dumpInventory()
     for i = 1, INVENTORY_SIZE do
@@ -162,38 +157,48 @@ function isGravel()
     end
 end
 
+function turnAround()
+    turtle.turnLeft()
+    turtle.turnLeft()
+end
+
+function turnToRow()
+    if dir == 1 then
+        turtle.turnLeft()
+    elseif dir == 2 then
+        turtle.turnRight()
+    end
+end
 
 function doColumn()
     turtle.select(1)
-    print("Total fuel ".. turtle.getFuelLevel())
+    print("Total fuel " .. turtle.getFuelLevel())
     for c = 1, deep do
-        -- 3n -2
+        -- 3n - 2
         next = (3 * c) - 2
-        print("next row is at ".. next)
+        print("next row is at " .. next)
         for spaces = 1, next do
             turtle.dig()
             turtle.digUp()
             turtle.forward()
             tileColCount = tileColCount + 1
         end
-        turtle.turnRight()
-        print("now showing row "..c)
+        turnToRow()
+        print("now showing row " .. c)
         --- do that rows
         doRow()
         goHomeRow()
 
         -- go to home
-        turtle.turnRight()
+        turnToRow()
         for spaces = 1, tileColCount do
             turtle.forward()
         end
-        turtle.turnLeft()
-        turtle.turnLeft()
+        turnAround()
         tileColCount = 0
-        print("now at home position "..c)
+        print("now at home position " .. c)
         dumpInventory()
         -- sleep(5)
-
     end
 end
 
@@ -203,13 +208,13 @@ function doRow()
     for i = 0, length do
         tilesWalked = tilesWalked + 1
         local okTorches = checkTorchesCount()
-    
+
         if not okTorches then
             print("no torches.. going home")
             tilesWalked = tilesWalked - 1
             break
         end
-    
+
         if isLava() then
             print("found lava.. going home")
             tilesWalked = tilesWalked - 1
@@ -221,21 +226,18 @@ function doRow()
             tilesWalked = tilesWalked - 1
             break
         end
-    
+
         turtle.dig()
         turtle.digUp()
         turtle.digDown()
         tileCount = tileCount + 1
         if tileCount == 6 then
             tileCount = 0
-            plantTorches()        
+            plantTorches()
         end
         turtle.forward()
-    
-    
     end
 end
-
 
 if turtle.getFuelLevel() < REFUEL_MIN then
     print("trying to refuel")
