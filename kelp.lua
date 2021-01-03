@@ -32,11 +32,9 @@ function turnAround()
 end
 
 -- Better fuel check
+turtle.refuel()
 if turtle.getFuelLevel() < REFUEL_MIN then
-    print("trying to refuel")
-    turtle.refuel()
-else
-    print("not going to refuel")
+    print("Not enough fuel")
     return
 end
 
