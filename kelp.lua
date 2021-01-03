@@ -38,6 +38,17 @@ function marchForward()
     end
 end
 
+function suckForward()
+    turtle.suck()
+    turtle.suckUp()
+    turtle.suckDown()
+    ok, err = turtle.forward()
+    if not ok then
+        turtle.dig()
+        suckForward()
+    end
+end
+
 function isEvenRow()
     if yLen % 2 == 1 then
         return false
@@ -91,9 +102,8 @@ for y = 1, yLen do
     xOffSet = 1
     toggleDir = not toggleDir
 end
-
-local extra = 4
-if isEvenRow() then
+-- move back to first tile of maze
+if not isEvenRow() then
     for x = 1, xLen - xOffSet do
         marchForward()
     end
@@ -107,8 +117,43 @@ else
         marchForward()
     end
 end
+-- move the extra off the map
+local extra = 4
+for n = 1, extra do
+    marchForward()
+end
+turtle.turnRight()
+for n = 1, extra do
+    marchForward()
+end
+--move up to the right level
+local moreHeight = 21
+for n = 1, 21 do
+    turtle.up()
+end
+turnAround()
+
+
 
 -- Collect
+xOffSet = 0
+toggleDir = true
+for y = 1, yLen + extra do
+    for x = 1, xLen - xOffSet + extra do
+        suckForward()
+    end
+    if toggleDir then
+        turtle.turnLeft()
+        suckForward()
+        turtle.turnLeft()
+    else
+        turtle.turnRight()
+        suckForward()
+        turtle.turnRight()
+    end
+    xOffSet = 1
+    toggleDir = not toggleDir
+end
 
 -- Return home
 
