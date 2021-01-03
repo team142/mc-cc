@@ -1,7 +1,6 @@
 --[[
  
 Created by: Just1689
-Lots of snippets take from farmer.lua (see notes)
  
 ]]--
 
