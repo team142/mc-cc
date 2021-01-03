@@ -118,7 +118,7 @@ else
     end
 end
 -- move the extra off the map
-local extra = 4
+local extra = 3
 for n = 1, extra do
     marchForward()
 end
@@ -127,8 +127,8 @@ for n = 1, extra do
     marchForward()
 end
 --move up to the right level
-local moreHeight = 21
-for n = 1, 21 do
+local moreHeight = 13
+for n = 1, moreHeight do
     turtle.up()
 end
 turnAround()
@@ -138,8 +138,8 @@ turnAround()
 -- Collect
 xOffSet = 0
 toggleDir = true
-for y = 1, yLen + extra do
-    for x = 1, xLen - xOffSet + extra do
+for y = 1, yLen + (2 * extra) do
+    for x = 1, xLen - xOffSet + (2 * extra) do
         suckForward()
     end
     if toggleDir then
@@ -155,6 +155,12 @@ for y = 1, yLen + extra do
     toggleDir = not toggleDir
 end
 
--- Return home
+-- Return to maze start
+
+-- return to base
 
 -- Deposit
+
+-- refuel
+
+-- return to start spot
