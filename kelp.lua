@@ -10,12 +10,11 @@ local yLen = 0
 local zLen = 0
 local REFUEL_MIN = 100
 
-if #arg == 3 then
+if #arg == 2 then
     xLen = tonumber(arg[1])
     yLen = tonumber(arg[2])
-    zLen = tonumber(arg[3])
 else
-    print("Please enter the x y z")
+    print("Please enter the x y")
     return
 end
 
@@ -44,13 +43,40 @@ end
 
 
 -- Enter maze
-for i = 1, 6 do
-    turtle.forward()
-end
+turtle.forward()
+turtle.turnRight()
+turtle.forward()
+turtle.down()
+turtle.forward()
+turtle.forward()
+turtle.up()
+turtle.turnRight()
+turtle.forward()
+turtle.turnLeft()
+turtle.forward()
+turtle.forward()
 turtle.up()
 
+local toggleDir = true
 -- Chop down grid
-
+for y = 1, yLen do
+    for x = 1, xLen do
+        turtle.dig()
+        turtle.forward()
+    end
+    if toggleDir then
+        turtle.turnLeft()
+        turtle.dig()
+        turtle.forward()
+        turtle.turnLeft()
+    else
+        turtle.turnRight()
+        turtle.dig()
+        turtle.forward()
+        turtle.turnRight()
+    end
+    toggleDir = not toggleDir
+end
 -- Collect
 
 -- Return home
