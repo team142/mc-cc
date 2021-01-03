@@ -2,7 +2,7 @@
  
 Created by: Just1689
  
-]] --
+]]--
 
 local INVENTORY_SIZE = 16
 local xLen = 0
@@ -36,6 +36,13 @@ function marchForward()
         turtle.dig()
         marchForward()
     end
+end
+
+function isEvenRow()
+    if yLen % 2 == 1 then
+        return false
+    end
+    return true
 end
 
 --[[
@@ -84,6 +91,23 @@ for y = 1, yLen do
     xOffSet = 1
     toggleDir = not toggleDir
 end
+
+local extra = 4
+if isEvenRow() then
+    for x = 1, xLen - xOffSet do
+        marchForward()
+    end
+    turtle.turnLeft()
+    for y = 1, yLen do
+        marchForward()
+    end
+else
+    turtle.turnRight()
+    for y = 1, yLen do
+        marchForward()
+    end
+end
+
 -- Collect
 
 -- Return home
