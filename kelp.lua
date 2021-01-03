@@ -178,6 +178,7 @@ end
 turtle.turnRight()
 turtle.forward()
 turtle.forward()
+turtle.forward()
 turtle.down()
 turtle.down()
 turtle.forward()
@@ -185,6 +186,7 @@ turtle.forward()
 turtle.up()
 turtle.forward()
 turtle.turnLeft()
+turtle.forward()
 turnAround()
 
 
