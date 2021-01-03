@@ -58,9 +58,10 @@ turtle.forward()
 turtle.up()
 
 local toggleDir = true
+local xOffSet = 0
 -- Chop down grid
 for y = 1, yLen do
-    for x = 1, xLen do
+    for x = 1, xLen - xOffSet do
         turtle.dig()
         turtle.forward()
     end
@@ -75,6 +76,7 @@ for y = 1, yLen do
         turtle.forward()
         turtle.turnRight()
     end
+    xOffSet = 1
     toggleDir = not toggleDir
 end
 -- Collect
