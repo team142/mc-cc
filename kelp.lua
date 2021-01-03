@@ -157,11 +157,11 @@ end
 
 -- move back to first tile of maze FROM the extra location
 if not isEvenRow() then
-    for x = 1, xLen - xOffSet + extra do
+    for x = 1, xLen + extra do
         marchForward()
     end
     turtle.turnLeft()
-    for y = 1, yLen do
+    for y = 1, yLen + extra - 1 do
         marchForward()
     end
 else
@@ -175,6 +175,18 @@ for n = 1, moreHeight do
 end
 
 -- return to base
+turtle.turnRight()
+turtle.forward()
+turtle.forward()
+turtle.down()
+turtle.down()
+turtle.forward()
+turtle.forward()
+turtle.up()
+turtle.forward()
+turtle.turnLeft()
+turnAround()
+
 
 -- Deposit
 
