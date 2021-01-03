@@ -30,17 +30,25 @@ function turnAround()
     turtle.turnLeft()
 end
 
--- Better fuel check
-turtle.refuel()
-if turtle.getFuelLevel() < REFUEL_MIN then
-    print("Not enough fuel")
-    return
+function marchForward()
+    ok, err = turtle.forward()
+    if not ok then
+        turtle.dig()
+        marchForward()
+    end
 end
 
 --[[
     APPLICATION STARS HERE
 ]] --
 
+
+-- Better fuel check
+turtle.refuel()
+if turtle.getFuelLevel() < REFUEL_MIN then
+    print("Not enough fuel")
+    return
+end
 
 -- Enter maze
 turtle.forward()
@@ -62,18 +70,15 @@ local xOffSet = 0
 -- Chop down grid
 for y = 1, yLen do
     for x = 1, xLen - xOffSet do
-        turtle.dig()
-        turtle.forward()
+        marchForward()
     end
     if toggleDir then
         turtle.turnLeft()
-        turtle.dig()
-        turtle.forward()
+        marchForward()
         turtle.turnLeft()
     else
         turtle.turnRight()
-        turtle.dig()
-        turtle.forward()
+        marchForward()
         turtle.turnRight()
     end
     xOffSet = 1
