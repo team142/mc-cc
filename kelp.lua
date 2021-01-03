@@ -8,7 +8,7 @@ local INVENTORY_SIZE = 16
 local xLen = 0
 local yLen = 0
 local zLen = 0
-local REFUEL_MIN = 100
+local REFUEL_MIN = 600
 
 if #arg == 2 then
     xLen = tonumber(arg[1])
@@ -56,6 +56,40 @@ function isEvenRow()
     return true
 end
 
+function inventorySort()
+    for j = 1, INVENTORY_SIZE do
+        local currentItem = turtle.getItemDetail(j)
+
+        if currentItem ~= nil then
+            turtle.select(j)
+            for k = j, INVENTORY_SIZE do
+                if turtle.compareTo(k) then
+                    turtle.select(k)
+                    turtle.transferTo(j)
+                    turtle.select(j)
+                end
+            end
+        end
+    end
+end
+
+
+-- Dump inventory
+function dumpInventory()
+    for i = 1, INVENTORY_SIZE do
+        local currentItem = turtle.getItemDetail(i)
+        if currentItem ~= nil then
+            turtle.select(i)
+            if turtle.dropDown() == false then
+                print("Error: no room in left ")
+                return
+            end
+        end
+    end
+    inventorySort()
+    turtle.select(1)
+end
+
 --[[
     APPLICATION STARS HERE
 ]] --
@@ -64,7 +98,7 @@ end
 -- Better fuel check
 turtle.refuel()
 if turtle.getFuelLevel() < REFUEL_MIN then
-    print("Not enough fuel")
+    print("Error: Not enough fuel. Need at least ".. REFUEL_MIN)
     return
 end
 
@@ -191,7 +225,13 @@ turnAround()
 
 
 -- Deposit
+dumpInventory()
 
 -- refuel
+-- TODO: if more than 10,000 then Skip
+-- TODO: go to fuel chest
+-- TODO: pickup, refuel
 
 -- return to start spot
+
+-- TODO: put in for loop
