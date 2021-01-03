@@ -155,7 +155,24 @@ for y = 1, yLen + (2 * extra) do
     toggleDir = not toggleDir
 end
 
--- Return to maze start
+-- move back to first tile of maze FROM the extra location
+if not isEvenRow() then
+    for x = 1, xLen - xOffSet + extra do
+        marchForward()
+    end
+    turtle.turnLeft()
+    for y = 1, yLen do
+        marchForward()
+    end
+else
+    turtle.turnRight()
+    for y = 1, yLen + extra do
+        marchForward()
+    end
+end
+for n = 1, moreHeight do
+    turtle.down()
+end
 
 -- return to base
 
