@@ -5,18 +5,15 @@ Created by: Just1689
 ]]--
 
 local INVENTORY_SIZE = 16
-local xLen = 0
-local yLen = 0
-local zLen = 0
+local xLen = 13
+local yLen = 11
 local REFUEL_MIN = 600
 
 if #arg == 2 then
     xLen = tonumber(arg[1])
     yLen = tonumber(arg[2])
-else
-    print("Please enter the x y")
-    return
 end
+print("Using x,y:" .. xLen .. ", " .. yLen)
 
 local ACCEPTED_FUELS = {
     "minecraft:coal_block",
