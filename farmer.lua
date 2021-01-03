@@ -1,10 +1,16 @@
 --[[
- 
+
+ORIGINAL CODE 
+
 Script Created by CEEBS
 YouTube: https://www.youtube.com/channel/UCQvB8QBknoS1jYgwpYGQrQg
 Twitter: https://twitter.com/OnlyCeebs
  
 Really appreciate all the support you have given me, so thank you!
+
+CHANGES
+Modified by Squire 2021
+
 
 ]]--
 
@@ -34,7 +40,6 @@ local ACCEPTED_FUELS = {
     "minecraft:coal",
 	"minecraft:dried_kelp_block",
 	"minecraft:charcoal"
-	
 }
 
 -- List of accepted seeds
@@ -42,11 +47,6 @@ local SEEDS = {
     "minecraft:carrot",
     "minecraft:potato",
     "minecraft:wheat_seeds"
-}
-
--- List of accepted seeds
-local TORCHES = {
-    "minecraft:torch"
 }
 
 -- List of mature crops
@@ -90,6 +90,7 @@ end
 -- Get the amount of seeds
 function getSeedsCount()
     local seedsCount = 0
+
     for i = 1, INVENTORY_SIZE do
         local currentItem = turtle.getItemDetail(i)
         if currentItem ~= nil then
@@ -174,7 +175,7 @@ end
 -- Harvest our crops!
 function harvestCrops()
     local isBlock, block = turtle.inspectDown()
-    turtle.dig
+
     if isBlock ~= false then
         local isCrop = false
 
@@ -315,7 +316,7 @@ function farm()
 end
 
 while true do
-    -- farm()
+    farm()
     print("Completed loop, waiting " .. MAIN_LOOP_INTERVAL .. " seconds to start next loop.")
     sleep(MAIN_LOOP_INTERVAL)
 end
