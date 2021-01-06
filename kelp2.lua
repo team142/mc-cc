@@ -238,23 +238,9 @@ turtle.up()
 turtle.up()
 turtle.forward()
 turtle.forward()
-turtle.forward()
 turtle.turnLeft()
 turtle.forward()
 turtle.forward()
 turtle.forward()
 turnAround()
 dumpInventory()
-
-
--- -- Deposit
--- dumpInventory()
-
--- refuel
--- TODO: if more than 10,000 then Skip
--- TODO: go to fuel chest
--- TODO: pickup, refuel
-
--- return to start spot
-
--- TODO: put in for loop
