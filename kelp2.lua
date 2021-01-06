@@ -227,6 +227,7 @@ turnAround()
 for i = 1, 24 do
     marchForward()
 end
+turtle.turnLeft()
 for i = 1, 10 do
     turtle.down()
 end
