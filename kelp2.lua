@@ -128,6 +128,7 @@ turtle.down()
 turtle.down()
 turtle.down()
 
+
 local toggleDir = true
 local xOffSet = 0
 -- Chop down grid
