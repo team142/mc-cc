@@ -123,6 +123,10 @@ for j = 1, 25 do
     marchForward()
 end
 turtle.turnLeft()
+turtle.down()
+turtle.down()
+turtle.down()
+turtle.down()
 
 local toggleDir = true
 local xOffSet = 0
