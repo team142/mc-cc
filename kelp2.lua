@@ -119,100 +119,101 @@ turtle.up()
 turtle.up()
 turtle.back()
 turtle.turnRight()
-for j = 1, 26 do
+for j = 1, 25 do
     marchForward()
 end
+turtle.turnLeft()
 
--- local toggleDir = true
--- local xOffSet = 0
--- -- Chop down grid
--- for y = 1, yLen do
---     for x = 1, xLen - xOffSet do
---         marchForward()
---     end
---     if toggleDir then
---         turtle.turnLeft()
---         marchForward()
---         turtle.turnLeft()
---     else
---         turtle.turnRight()
---         marchForward()
---         turtle.turnRight()
---     end
---     xOffSet = 1
---     toggleDir = not toggleDir
--- end
--- -- move back to first tile of maze
--- if not isEvenRow() then
---     for x = 1, xLen - xOffSet do
---         marchForward()
---     end
---     turtle.turnLeft()
---     for y = 1, yLen do
---         marchForward()
---     end
--- else
---     turtle.turnRight()
---     for y = 1, yLen do
---         marchForward()
---     end
--- end
--- -- move the extra off the map
--- local extra = 3
--- for n = 1, extra do
---     marchForward()
--- end
--- turtle.turnRight()
--- for n = 1, extra do
---     marchForward()
--- end
--- --move up to the right level
--- local moreHeight = 13
--- for n = 1, moreHeight do
---     turtle.up()
--- end
--- turnAround()
+local toggleDir = true
+local xOffSet = 0
+-- Chop down grid
+for y = 1, yLen do
+    for x = 1, xLen - xOffSet do
+        marchForward()
+    end
+    if toggleDir then
+        turtle.turnLeft()
+        marchForward()
+        turtle.turnLeft()
+    else
+        turtle.turnRight()
+        marchForward()
+        turtle.turnRight()
+    end
+    xOffSet = 1
+    toggleDir = not toggleDir
+end
+-- move back to first tile of maze
+if not isEvenRow() then
+    for x = 1, xLen - xOffSet do
+        marchForward()
+    end
+    turtle.turnLeft()
+    for y = 1, yLen do
+        marchForward()
+    end
+else
+    turtle.turnRight()
+    for y = 1, yLen do
+        marchForward()
+    end
+end
+-- move the extra off the map
+local extra = 3
+for n = 1, extra do
+    marchForward()
+end
+turtle.turnRight()
+for n = 1, extra do
+    marchForward()
+end
+--move up to the right level
+local moreHeight = 13
+for n = 1, moreHeight do
+    turtle.up()
+end
+turnAround()
 
 
 
--- -- Collect
--- xOffSet = 0
--- toggleDir = true
--- for y = 1, yLen + (2 * extra) do
---     for x = 1, xLen - xOffSet + (2 * extra) do
---         suckForward()
---     end
---     if toggleDir then
---         turtle.turnLeft()
---         suckForward()
---         turtle.turnLeft()
---     else
---         turtle.turnRight()
---         suckForward()
---         turtle.turnRight()
---     end
---     xOffSet = 1
---     toggleDir = not toggleDir
--- end
+-- Collect
+xOffSet = 0
+toggleDir = true
+for y = 1, yLen + (2 * extra) do
+    for x = 1, xLen - xOffSet + (2 * extra) do
+        suckForward()
+    end
+    if toggleDir then
+        turtle.turnLeft()
+        suckForward()
+        turtle.turnLeft()
+    else
+        turtle.turnRight()
+        suckForward()
+        turtle.turnRight()
+    end
+    xOffSet = 1
+    toggleDir = not toggleDir
+end
 
--- -- move back to first tile of maze FROM the extra location
--- if not isEvenRow() then
---     for x = 1, xLen + extra do
---         marchForward()
---     end
---     turtle.turnLeft()
---     for y = 1, yLen + extra - 1 do
---         marchForward()
---     end
--- else
---     turtle.turnRight()
---     for y = 1, yLen + extra do
---         marchForward()
---     end
--- end
--- for n = 1, moreHeight do
---     turtle.down()
--- end
+-- move back to first tile of maze FROM the extra location
+if not isEvenRow() then
+    for x = 1, xLen + extra do
+        marchForward()
+    end
+    turtle.turnLeft()
+    for y = 1, yLen + extra - 1 do
+        marchForward()
+    end
+else
+    turtle.turnRight()
+    for y = 1, yLen + extra do
+        marchForward()
+    end
+end
+for n = 1, moreHeight do
+    turtle.down()
+end
 
 -- -- return to base
 -- turtle.turnRight()
@@ -236,11 +237,11 @@ end
 -- -- Deposit
 -- dumpInventory()
 
--- -- refuel
--- -- TODO: if more than 10,000 then Skip
--- -- TODO: go to fuel chest
--- -- TODO: pickup, refuel
+-- refuel
+-- TODO: if more than 10,000 then Skip
+-- TODO: go to fuel chest
+-- TODO: pickup, refuel
 
--- -- return to start spot
+-- return to start spot
 
--- -- TODO: put in for loop
+-- TODO: put in for loop
