@@ -220,23 +220,30 @@ for n = 1, moreHeight do
     turtle.down()
 end
 
--- -- return to base
--- turtle.turnRight()
--- turtle.forward()
--- turtle.forward()
--- turtle.forward()
--- turtle.down()
--- turtle.down()
--- turtle.down()
--- turtle.down()
--- turtle.down()
--- turtle.forward()
--- turtle.forward()
--- turtle.up()
--- turtle.forward()
--- turtle.turnLeft()
--- turtle.forward()
--- turnAround()
+-- return to base
+turtle.up()
+turtle.up()
+turnAround()
+for i = 1, 24 do
+    marchForward()
+end
+for i = 1, 10 do
+    turtle.down()
+end
+turtle.forward()
+turtle.forward()
+turtle.up()
+turtle.up()
+turtle.up()
+turtle.forward()
+turtle.forward()
+turtle.forward()
+turtle.turnLeft()
+turtle.forward()
+turtle.forward()
+turtle.forward()
+turnAround()
+dumpInventory()
 
 
 -- -- Deposit
